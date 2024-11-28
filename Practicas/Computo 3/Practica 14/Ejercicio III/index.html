@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar contenido en tiempo real</title>
+</head>
+<script>
+    function actualizarContenido() {
+        let xhr = new XMLHttpRequest()
+        xhr.open('GET', 'contenido.html', true)
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.getElementById('contenido').innerHTML = xhr.responseText
+            }
+        }
+        xhr.send()
+    }
+    setInterval(actualizarContenido, 5000)
+</script>
+<body>
+    <div id="contenido">Cargando resultados...</div>
+</body>
+</html>

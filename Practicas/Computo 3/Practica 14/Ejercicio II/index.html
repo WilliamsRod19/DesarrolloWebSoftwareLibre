@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar datos con ajá</title>
+</head>
+<body>
+    <form action="">
+        <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+        <button onclick="enviarDatos(e)">Enviar</button>
+        <div id="respuesta"></div>
+    </form>
+    <script>
+        function enviarDatos(e) {
+            e.preventDefault()
+            let xhr = new XMLHttpRequest()
+            xhr.open('POST', 'enviarDatos.php', true)
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById('respuesta').innerHTML = xhr.responseText
+                }
+            }
+            xhr.send('nombre=' + document.getElementById('nombre').value)
+        }
+    </script>
+</body>
+</html>
